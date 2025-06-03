@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - Recipe Management</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem auto;
+            font-family: sans-serif;
+        }
+        th, td {
+            padding: 0.75rem;
+            border: 1px solid #ccc;
+            text-align: left;
+            vertical-align: top;
+        }
+        th {
+            background: #f4f4f4;
+        }
+        img {
+            max-width: 100px;
+            max-height: 100px;
+        }
+        form {
+            margin: 0;
+        }
+        button {
+            background-color: #ff6b6b;
+            color: white;
+            padding: 6px 12px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        button:hover {
+            background-color: #e63946;
+        }
+        td pre {
+            white-space: pre-wrap;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">Admin - Recipe List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Image</th>
+                <th>Category</th>
+                <th>Prep Time</th>
+                <th>Cook Time</th>
+                <th>Ingredients</th>
+                <th>Instructions</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for recipe in recipes %}
+            <tr>
+                <td>{{ recipe.id }}</td>
+                <td>{{ recipe.title }}</td>
+                <td><pre>{{ recipe.description }}</pre></td>
+                <td>
+                    {% if recipe.image_filename %}
+                        <img src="{{ url_for('uploaded_file', filename=recipe.image_filename) }}" alt="Recipe Image">
+                    {% else %}
+                        No Image
+                    {% endif %}
+                </td>
+                <td>{{ recipe.category }}</td>
+                <td>{{ recipe.prep_time }} min</td>
+                <td>{{ recipe.cook_time }} min</td>
+                <td><pre>{{ recipe.ingredients }}</pre></td>
+                <td><pre>{{ recipe.instructions }}</pre></td>
+                <td>
+                    <form action="{{ url_for('delete_recipe', recipe_id=recipe.id) }}" method="POST">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
