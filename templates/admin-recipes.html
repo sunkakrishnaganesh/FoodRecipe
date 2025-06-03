@@ -41,10 +41,15 @@
             white-space: pre-wrap;
             font-size: 0.9em;
         }
+        h1 {
+            text-align: center;
+            font-family: sans-serif;
+            margin-top: 1.5rem;
+        }
     </style>
 </head>
 <body>
-    <h1 style="text-align: center;">Admin - Recipe List</h1>
+    <h1>Admin - Recipe List</h1>
     <table>
         <thead>
             <tr>
@@ -63,23 +68,23 @@
         <tbody>
             {% for recipe in recipes %}
             <tr>
-                <td>{{ recipe.id }}</td>
-                <td>{{ recipe.title }}</td>
-                <td><pre>{{ recipe.description }}</pre></td>
+                <td>{{ recipe[0] }}</td>
+                <td>{{ recipe[1] }}</td>
+                <td><pre>{{ recipe[2] }}</pre></td>
                 <td>
-                    {% if recipe.image_filename %}
-                        <img src="{{ url_for('uploaded_file', filename=recipe.image_filename) }}" alt="Recipe Image">
+                    {% if recipe[3] %}
+                        <img src="{{ url_for('uploaded_file', filename=recipe[3]) }}" alt="Recipe Image">
                     {% else %}
                         No Image
                     {% endif %}
                 </td>
-                <td>{{ recipe.category }}</td>
-                <td>{{ recipe.prep_time }} min</td>
-                <td>{{ recipe.cook_time }} min</td>
-                <td><pre>{{ recipe.ingredients }}</pre></td>
-                <td><pre>{{ recipe.instructions }}</pre></td>
+                <td>{{ recipe[4] }}</td>
+                <td>{{ recipe[5] }} min</td>
+                <td>{{ recipe[6] }} min</td>
+                <td><pre>{{ recipe[7] }}</pre></td>
+                <td><pre>{{ recipe[8] }}</pre></td>
                 <td>
-                    <form action="{{ url_for('delete_recipe', recipe_id=recipe.id) }}" method="POST">
+                    <form action="{{ url_for('delete_recipe', recipe_id=recipe[0]) }}" method="POST">
                         <button type="submit">Delete</button>
                     </form>
                 </td>
