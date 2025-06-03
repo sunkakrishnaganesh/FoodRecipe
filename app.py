@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 import psycopg2
 import os
 load_dotenv()  # This loads the .env file
+print("DB URL:", os.getenv("DATABASE_URL"))
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__, template_folder='templates', static_folder='static')
