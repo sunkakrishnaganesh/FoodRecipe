@@ -3,5 +3,4 @@ services:
     name: flavorfolio
     env: python
     buildCommand: ""
-    startCommand: "python app.py"
-    autoDeploy: true
+    startCommand: "python3 app.py"
