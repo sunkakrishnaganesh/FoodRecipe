@@ -127,23 +127,7 @@ def thank_you():
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
-@app.route('/recipes', methods=['POST'])
-def add_recipe():
-    try:
-        title = request.form.get('title')
-        description = request.form.get('description')
-        image = request.files.get('image')
-        print("🔍 title:", title)
-        print("🔍 description:", description)
-        print("🔍 image filename:", image.filename if image else "No image")
 
-        # ... continue logic here ...
-
-        return redirect(url_for('thank_you'))
-
-    except Exception as e:
-        print("❌ Error in add_recipe:", str(e))
-        return "Internal Server Error", 500
 
 
 if __name__ == '__main__':
