@@ -30,9 +30,13 @@ def init_db():
                     cook_time INTEGER,
                     ingredients TEXT,
                     instructions TEXT
-                )
+                );
             ''')
             conn.commit()
+
+# ✅ Run this during app startup
+init_db()
+
 
 
 def get_db_connection():
